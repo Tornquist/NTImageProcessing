@@ -15,3 +15,6 @@ FOUNDATION_EXPORT double NTImageProcessingVersionNumber;
 FOUNDATION_EXPORT const unsigned char NTImageProcessingVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <NTImageProcessing/PublicHeader.h>
+
+#import "NTImageProcessing-Swift.h"
+#import <NTImageProcessing/NTKeyGeneration.h>

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NTImage {
+public class NTImage: NSObject {
     var data: NSData?
     var image: UIImage?
     
@@ -24,21 +24,80 @@ public class NTImage {
         guard dataToEncrypt != nil else {
             return nil
         }
-        let cipherText: UnsafeMutablePointer<UInt8> = nil
-        let cipherTextLength: UnsafeMutablePointer<Int> = nil
-        let res = SecKeyEncrypt(key, .PKCS1, UnsafePointer(dataToEncrypt!.bytes), dataToEncrypt!.length, cipherText, cipherTextLength)
-        NSLog("\(res)")
-        NSLog("\(cipherText)")
-        NSLog("\(cipherTextLength)")
-        return NSData()
+
+        let blockSize = SecKeyGetBlockSize(key)
+        let maxChunkSize = blockSize - 11
+        
+        var decryptedDataAsArray = [UInt8](count: dataToEncrypt!.length / sizeof(UInt8), repeatedValue: 0)
+        dataToEncrypt!.getBytes(&decryptedDataAsArray, length: dataToEncrypt!.length)
+        
+        var encryptedData = [UInt8](count: 0, repeatedValue: 0)
+        var idx = 0
+        while (idx < decryptedDataAsArray.count ) {
+            var idxEnd = idx + maxChunkSize
+            if ( idxEnd > decryptedDataAsArray.count ) {
+                idxEnd = decryptedDataAsArray.count
+            }
+            var chunkData = [UInt8](count: maxChunkSize, repeatedValue: 0)
+            for ( var i = idx; i < idxEnd; i++ ) {
+                chunkData[i-idx] = decryptedDataAsArray[i]
+            }
+            
+            var encryptedDataBuffer = [UInt8](count: blockSize, repeatedValue: 0)
+            var encryptedDataLength = blockSize
+            
+            let status = SecKeyEncrypt(key, .PKCS1, chunkData, idxEnd-idx, &encryptedDataBuffer, &encryptedDataLength)
+            if ( status != noErr ) {
+                NSLog("Error while encrypting: %i", status)
+                return nil
+            }
+            //let finalData = removePadding(encryptedDataBuffer)
+            encryptedData += encryptedDataBuffer
+            
+            idx += maxChunkSize
+        }
+        
+        return NSData(bytes: encryptedData, length: encryptedData.count)
     }
 
     /**
      Takes in data, key path, and password and decrypts using RSA.
      Converts resulting data to UIImage.
      */
-    public class func decrypt(data:NSData, withKey key: SecKeyRef) -> UIImage {
-        return UIImage()
+    public class func decrypt(data:NSData, withKey key: SecKeyRef) -> UIImage? {
+        let blockSize = SecKeyGetBlockSize(key)
+        
+        var encryptedDataAsArray = [UInt8](count: data.length / sizeof(UInt8), repeatedValue: 0)
+        data.getBytes(&encryptedDataAsArray, length: data.length)
+        
+        var decryptedData = [UInt8](count: 0, repeatedValue: 0)
+        var idx = 0
+        while (idx < encryptedDataAsArray.count ) {
+            var idxEnd = idx + blockSize
+            if ( idxEnd > encryptedDataAsArray.count ) {
+                idxEnd = encryptedDataAsArray.count
+            }
+            var chunkData = [UInt8](count: blockSize, repeatedValue: 0)
+            for ( var i = idx; i < idxEnd; i++ ) {
+                chunkData[i-idx] = encryptedDataAsArray[i]
+            }
+            
+            var decryptedDataBuffer = [UInt8](count: blockSize, repeatedValue: 0)
+            var decryptedDataLength = blockSize
+            
+            let status = SecKeyDecrypt(key, .PKCS1, chunkData, idxEnd-idx, &decryptedDataBuffer, &decryptedDataLength)
+            if ( status != noErr ) {
+                return nil
+            }
+            let finalData = removePadding(decryptedDataBuffer)
+            decryptedData += finalData
+            
+            idx += blockSize
+        }
+        
+        let decryptedNSData = NSData(bytes: decryptedData, length: decryptedData.count)
+        
+        return UIImage(data: decryptedNSData)
     }
     
     /**
@@ -70,5 +129,25 @@ public class NTImage {
             return nil
         }
         return UIImagePNGRepresentation(image!)
+    }
+    
+    class func removePadding(data: [UInt8]) -> [UInt8] {
+        var idxFirstZero = -1
+        var idxNextZero = data.count
+        for ( var i = 0; i < data.count; i++ ) {
+            if ( data[i] == 0 ) {
+                if ( idxFirstZero < 0 ) {
+                    idxFirstZero = i
+                } else {
+                    idxNextZero = i
+                    break
+                }
+            }
+        }
+        var newData = [UInt8](count: idxNextZero-idxFirstZero-1, repeatedValue: 0)
+        for ( var i = idxFirstZero+1; i < idxNextZero; i++ ) {
+            newData[i-idxFirstZero-1] = data[i]
+        }
+        return newData
     }
 }

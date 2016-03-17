@@ -10,7 +10,7 @@
 		1A1D4AE71C99C08B0059BCFB /* NTImageProcessing.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1D4AE61C99C08B0059BCFB /* NTImageProcessing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A1D4AEE1C99C08B0059BCFB /* NTImageProcessing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1D4AE31C99C08B0059BCFB /* NTImageProcessing.framework */; };
 		1A1D4AF31C99C08B0059BCFB /* NTImageProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D4AF21C99C08B0059BCFB /* NTImageProcessingTests.swift */; };
-		1AE400B81C9AFC3300EFBF93 /* NTKeyGeneration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AE400B71C9AFC3300EFBF93 /* NTKeyGeneration.h */; };
+		1AE400B81C9AFC3300EFBF93 /* NTKeyGeneration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AE400B71C9AFC3300EFBF93 /* NTKeyGeneration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1AE400BB1C9AFC6E00EFBF93 /* NTKeyGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE400BA1C9AFC6E00EFBF93 /* NTKeyGeneration.m */; };
 		D8A025261C9A4FF500175E3F /* NTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A025251C9A4FF500175E3F /* NTImage.swift */; };
 /* End PBXBuildFile section */
@@ -339,7 +339,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathantornquist.NTImageProcessing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -358,7 +358,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nathantornquist.NTImageProcessing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 			};
 			name = Release;
 		};

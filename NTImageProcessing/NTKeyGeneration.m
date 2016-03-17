@@ -10,8 +10,8 @@
 
 @implementation NTKeyGeneration
 
-+ (SecKeyRef)getPublicKeyRefAtPath:(NSString *)path {
-    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:path ofType:@"der"];
++ (SecKeyRef)getPublicKeyRefWithName:(NSString *)name {
+    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:name ofType:@"der"];
     NSData *certData = [NSData dataWithContentsOfFile:resourcePath];
     SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)certData);
     SecKeyRef key = NULL;
@@ -25,8 +25,13 @@
                 SecTrustResultType result;
                 SecTrustEvaluate(trust, &result);
 
-                //Check the result of the trust evaluation rather than the result of the API invocation.
-                if (result == kSecTrustResultProceed || result == kSecTrustResultUnspecified) {
+                if (result != kSecTrustResultDeny) {
+                    // TODO: Verify certificate manually
+                    // Because the certificate is self signed, it would need to be manually added
+                    // to the trust.  In this case, all certificates will be accepted unless the user
+                    // implicitely denied them.  The actual certificate value really isn't important,
+                    // and instead is just a way for the public key to be transmitted to the device.
+                    // The key value is what matters.
                     key = SecTrustCopyPublicKey(trust);
                 }
             }
@@ -38,8 +43,8 @@
     return key;
 }
 
-+ (SecKeyRef)getPrivateKeyRefAtPath:(NSString *)path withPassword:(NSString *)password {
-    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:path ofType:@"p12"];
++ (SecKeyRef)getPrivateKeyRefWithName:(NSString *)name andPassword:(NSString *)password {
+    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:name ofType:@"p12"];
     NSData *p12Data = [NSData dataWithContentsOfFile:resourcePath];
     
     NSMutableDictionary * options = [[NSMutableDictionary alloc] init];

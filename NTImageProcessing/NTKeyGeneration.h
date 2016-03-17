@@ -11,7 +11,7 @@
 
 @interface NTKeyGeneration : NSObject
 
-+ (SecKeyRef)getPublicKeyRefAtPath:(NSString *)path;
-+ (SecKeyRef)getPrivateKeyRefAtPath:(NSString *)path withPassword:(NSString *)password;
++ (SecKeyRef)getPublicKeyRefWithName:(NSString *)name;
++ (SecKeyRef)getPrivateKeyRefWithName:(NSString *)name andPassword:(NSString *)password;
 
 @end
