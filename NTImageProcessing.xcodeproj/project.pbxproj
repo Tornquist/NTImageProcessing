@@ -12,6 +12,7 @@
 		1A1D4AF31C99C08B0059BCFB /* NTImageProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D4AF21C99C08B0059BCFB /* NTImageProcessingTests.swift */; };
 		1AE400B81C9AFC3300EFBF93 /* NTKeyGeneration.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AE400B71C9AFC3300EFBF93 /* NTKeyGeneration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1AE400BB1C9AFC6E00EFBF93 /* NTKeyGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE400BA1C9AFC6E00EFBF93 /* NTKeyGeneration.m */; };
+		1AE400C61C9B46AE00EFBF93 /* NTSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE400C51C9B46AE00EFBF93 /* NTSecurity.swift */; };
 		D8A025261C9A4FF500175E3F /* NTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A025251C9A4FF500175E3F /* NTImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		1A1D4AF41C99C08B0059BCFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AE400B71C9AFC3300EFBF93 /* NTKeyGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTKeyGeneration.h; sourceTree = "<group>"; };
 		1AE400BA1C9AFC6E00EFBF93 /* NTKeyGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTKeyGeneration.m; sourceTree = "<group>"; };
+		1AE400C51C9B46AE00EFBF93 /* NTSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTSecurity.swift; sourceTree = "<group>"; };
 		D8A025251C9A4FF500175E3F /* NTImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				1A1D4AE61C99C08B0059BCFB /* NTImageProcessing.h */,
 				1A1D4AE81C99C08B0059BCFB /* Info.plist */,
 				D8A025251C9A4FF500175E3F /* NTImage.swift */,
+				1AE400C51C9B46AE00EFBF93 /* NTSecurity.swift */,
 				1AE400B91C9AFC5900EFBF93 /* Key Generation */,
 			);
 			path = NTImageProcessing;
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8A025261C9A4FF500175E3F /* NTImage.swift in Sources */,
+				1AE400C61C9B46AE00EFBF93 /* NTSecurity.swift in Sources */,
 				1AE400BB1C9AFC6E00EFBF93 /* NTKeyGeneration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
