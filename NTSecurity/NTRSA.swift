@@ -36,7 +36,7 @@ public class NTRSA: NSObject {
                 NSLog("Error while encrypting: %i", status)
                 return nil
             }
-            //let finalData = removePadding(encryptedDataBuffer)
+
             encryptedData += encryptedDataBuffer
             
             idx += maxChunkSize
@@ -70,8 +70,7 @@ public class NTRSA: NSObject {
             if ( status != noErr ) {
                 return nil
             }
-            //let finalData = removePadding(decryptedDataBuffer)
-            //decryptedData += finalData
+            
             decryptedData += decryptedDataBuffer
             
             idx += blockSize
