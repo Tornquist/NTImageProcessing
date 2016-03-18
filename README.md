@@ -75,3 +75,8 @@ openssl pkcs12 -export -out <rsaPrivate.p12> -inkey rsa -in rsa.crt
 # License
 
 This project is completely open source and under the MIT license. For full details please see [license.md](LICENSE.md)
+
+# Special Thanks
+
+[Arnaud Thiercelin](https://github.com/athiercelin) - For mentoring and assistance
+

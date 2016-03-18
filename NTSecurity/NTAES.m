@@ -7,7 +7,6 @@
 //
 
 #import "NTAES.h"
-//TODO: Identify why this throws an error when included in NTAES.h
 #import <CommonCrypto/CommonCryptor.h>
 
 @implementation NTAES
@@ -46,7 +45,7 @@
     }
     else if (cryptStatus == kCCParamError)
     {
-        NSLog(@"- Illegal parameter value.");
+        NSLog(@" - Illegal parameter value.");
     }
     else if (cryptStatus == kCCBufferTooSmall)
     {
@@ -104,7 +103,7 @@
     }
     else if (cryptStatus == kCCParamError)
     {
-        NSLog(@"- Illegal parameter value.");
+        NSLog(@" - Illegal parameter value.");
     }
     else if (cryptStatus == kCCBufferTooSmall)
     {
