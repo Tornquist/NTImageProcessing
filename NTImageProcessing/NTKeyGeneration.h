@@ -13,5 +13,6 @@
 
 + (SecKeyRef)getPublicKeyRefWithName:(NSString *)name;
 + (SecKeyRef)getPrivateKeyRefWithName:(NSString *)name andPassword:(NSString *)password;
++ (NSString *)generateAES256Key;
 
 @end

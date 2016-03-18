@@ -73,4 +73,34 @@
     return privateKeyRef;
 }
 
++ (NSString *)generateAES256Key {
+    int charCount = 32;
+    int passIndex;
+    int charIndex;
+    
+    char *alphaSec = "abcdefghijklmnopqrstuvwxyzABCEDEFGHIJKLMNOPQRSTUVWXYZ1234567890,./?'\"\\|]}[{=+-_)(*&^%$#@!<>:;";
+    
+    NSMutableString *tempPass = [NSMutableString new];
+    NSMutableString *resString = [NSMutableString new];
+    
+    srandom((unsigned int)time(0));
+    
+    [resString appendFormat:@"%d - ", passIndex+1];
+    
+    for (charIndex = 0; charIndex < charCount; charIndex++)
+    {
+        char randChar = 0;
+        
+        long randval = random() % strlen(alphaSec);
+        randChar = alphaSec[randval];
+        
+        [tempPass appendFormat:@"%c", randChar];
+    }
+    [tempPass appendFormat:@"\n"];
+    [resString appendString:tempPass];
+    [tempPass setString:@""];
+    
+    return resString;
+}
+
 @end
