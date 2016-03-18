@@ -1,15 +1,15 @@
 //
-//  NTImageProcessingTests.swift
-//  NTImageProcessingTests
+//  NTSecurity.swift
+//  NTSecurity
 //
 //  Created by Nathan Tornquist on 3/16/16.
 //  Copyright © 2016 Nathan Tornquist. All rights reserved.
 //
 
 import XCTest
-@testable import NTImageProcessing
+@testable import NTSecurity
 
-class NTImageProcessingTests: XCTestCase {
+class NTSecurityTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

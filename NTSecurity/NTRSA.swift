@@ -1,6 +1,6 @@
 //
-//  NTSecurity.swift
-//  NTImageProcessing
+//  NTRSA.swift
+//  NTSecurity
 //
 //  Created by Nathan Tornquist on 3/17/16.
 //  Copyright © 2016 Nathan Tornquist. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NTSecurity: NSObject {
+public class NTRSA: NSObject {
     public class func encryptData(data: NSData, withKey key: SecKeyRef) -> NSData? {
         let blockSize = SecKeyGetBlockSize(key)
         let maxChunkSize = blockSize
@@ -71,7 +71,7 @@ public class NTSecurity: NSObject {
                 return nil
             }
             //let finalData = removePadding(decryptedDataBuffer)
-//            decryptedData += finalData
+            //decryptedData += finalData
             decryptedData += decryptedDataBuffer
             
             idx += blockSize
